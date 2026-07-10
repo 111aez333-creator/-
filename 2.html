@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>منصتي الإبداعية العالمية - معرض الصور ومشاركة التصاميم</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#00adb5">
+    <meta name="color-scheme" content="dark light">
+
+    <meta name="description" content="منصتي الإبداعية العالمية - منصة اجتماعية مبتكرة لعرض ومشاركة أعمال الأنمي، الشعارات، والمناظر الطبيعية بجودة عالية.">
+    <meta name="keywords" content="منصة إبداعية, معرض أعمال, صور أنمي, تصميم شعارات, مناظر طبيعية, مشاركة الصور">
+    <meta name="author" content="Creative Gallery Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://111aez333-creator.github.io/creativ-gallery/">
+    <link rel="manifest" href="manifest.json">
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://api.imgbb.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com wss://*.firebaseio.com; frame-src https://accounts.google.com https://my-creative-gallery.firebaseapp.com; object-src 'none'; base-uri 'self'; form-action 'self' https://api.imgbb.com;">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://111aez333-creator.github.io/creativ-gallery/">
+    <meta property="og:title" content="منصتي الإبداعية العالمية - معرض الفنون والتصميم">
+    <meta property="og:description" content="منصة اجتماعية وتفاعلية لعرض أعمال التصميم والرسم الرقمي.">
+    <meta property="og:image" content="icon.png">
+    <meta property="og:locale" content="ar_AR">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ImageGallery",
+      "name": "Creative Gallery - منصتي الإبداعية العالمية",
+      "description": "منصة اجتماعية مبتكرة لعرض ومشاركة أعمال الأنمي، الشعارات، والمناظر الطبيعية.",
+      "url": "https://111aez333-creator.github.io/creativ-gallery/",
+      "genre": "Digital Art"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<a href="#gallery-view" class="skip-link">تخطي إلى المحتوى الرئيسي</a>
+
+<div id="offline-warning" role="alert">⚠️ تصفح معلق: أنت تعمل حالياً بدون اتصال بالإنترنت</div>
+
+<div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="customLightbox" role="dialog" aria-modal="true" aria-label="عرض تفصيلي للصورة" hidden>
+    <button class="close-box" id="closeLightboxBtn" aria-label="إغلاق المعاينة">&times;</button>
+    <div class="lightbox-img-container">
+        <img id="customLightboxImg" src="" alt="المعاينة المكبرة للصورة" draggable="false">
+    </div>
+    <div class="lightbox-controls">
+        <button class="lightbox-ctrl-btn" id="zoom-in" aria-label="تكبير الصورة">➕</button>
+        <button class="lightbox-ctrl-btn" id="zoom-out" aria-label="تصغير الصورة">➖</button>
+        <button class="lightbox-ctrl-btn" id="zoom-reset" aria-label="إعادة تعيين الحجم">🔄</button>
+        <button class="lightbox-ctrl-btn" id="lightbox-share" aria-label="مشاركة سريعة">🔗</button>
+        <button class="lightbox-ctrl-btn" id="lightbox-download" aria-label="تحميل الصورة">📥</button>
+    </div>
+</div>
+
+<div id="login-bar" role="banner">
+    أنت تتصفح كمشاهد حالياً.
+    <button id="login-bar-btn">تسجيل الدخول للتفاعل والرفع</button>
+</div>
+
+<div id="login-screen" role="dialog" aria-modal="true" aria-label="تسجيل الدخول">
+    <div class="login-card">
+        <button id="close-login-screen" aria-label="إغلاق شاشة الدخول">×</button>
+        <h2>أهلاً بك في منصتك الإبداعية الاجتماعية</h2>
+        <button class="google-btn" id="google-login">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="" width="22" height="22" loading="lazy">
+            متابعة باستخدام جوجل
+        </button>
+    </div>
+</div>
+
+<main id="privacy-view" class="view-section">
+    <h1>سياسة الخصوصية</h1>
+    <p>نحن نحرص بشدة على حماية خصوصية بيانات مستخدمينا. لا نقوم بمشاركة أي معلومات شخصية مرتبطة بحساب Google الخاص بك مع أي جهات خارجية.</p>
+    <button class="filter-btn" onclick="goToHome()">العودة للمعرض العام</button>
+</main>
+
+<main id="terms-view" class="view-section">
+    <h1>شروط الاستخدام</h1>
+    <p>باستخدامك لمنصتنا، فإنك تقر وتلتزم بعدم رفع أو تداول أي محتوى يخالف معايير المجتمع.</p>
+    <button class="filter-btn" onclick="goToHome()">العودة للمعرض العام</button>
+</main>
+
+<div id="main-app-container">
+    <header class="header-bar" role="banner">
+        <div class="header-brand">
+            <img id="header-avatar" src="" alt="الصورة الشخصية" class="tab-trigger" data-target="profile-view" hidden>
+            <h2 id="welcome-msg" class="tab-trigger" data-target="profile-view">زائر المنصة</h2>
+        </div>
+
+        <nav class="header-actions" aria-label="التنقل الرئيسي">
+            <button class="nav-tab-btn active tab-trigger" data-target="gallery-view">🖼️ معرض الأعمال</button>
+            <button class="nav-tab-btn tab-trigger" id="nav-profile-btn" data-target="profile-view" hidden>👤 بروفايلي</button>
+            <button class="theme-btn" id="theme-toggle-btn" aria-label="تبديل وضع المظهر">🌓 المظهر</button>
+
+            <div class="noti-wrapper" id="noti-wrapper-area" hidden aria-haspopup="true" aria-label="الإشعارات">
+                🔔 <span class="noti-badge" id="noti-count" hidden>0</span>
+                <div class="noti-dropdown" id="noti-dropdown" role="menu">
+                    <div class="noti-item" style="font-weight:bold;color:var(--accent);">الإشعارات الأخيرة</div>
+                    <div id="noti-list"></div>
+                </div>
+            </div>
+
+            <button id="logout-btn" hidden>خروج</button>
+            <button id="login-nav-btn">دخول</button>
+        </nav>
+    </header>
+
+    <!-- المعرض الرئيسي -->
+    <section id="gallery-view" class="view-section active" aria-label="معرض الأعمال">
+        <div id="admin-panel" class="admin-panel" hidden>
+            <h3>لوحة تحكم الإدارة 🛡️</h3>
+            <button class="filter-btn" id="auto-moderate-btn">⚡ تشغيل المشرف الآلي</button>
+        </div>
+
+        <div class="search-container" role="search">
+            <input type="search" id="search-input" class="search-input" placeholder="🔍 ابحث بالوسوم (مثال: جبل، تصميم)" aria-label="حقل البحث بالوسوم" autocomplete="off">
+            <select id="sort-select" class="sort-select" aria-label="ترتيب الصور">
+                <option value="timestamp">📅 الأحدث رفعاً</option>
+                <option value="likesCount">🏆 الأكثر إعجاباً</option>
+            </select>
+            <button class="filter-btn" id="search-btn">بحث</button>
+        </div>
+
+        <nav class="controls" aria-label="تصفية الفئات">
+            <button class="filter-btn active" id="btn-all" data-category="الكل">الكل</button>
+            <button class="filter-btn" data-category="أنمي">أنمي</button>
+            <button class="filter-btn" data-category="مناظر">مناظر</button>
+            <button class="filter-btn" data-category="شعارات">شعارات</button>
+        </nav>
+
+        <div id="upload-section-box" class="drag-drop-zone" hidden>
+            <p>اسحب وأفلت الصورة هنا أو انقر لاختيارها</p>
+            <input type="file" id="upload" accept="image/jpeg,image/png,image/webp,image/gif" hidden aria-label="تحميل ملف صورة">
+            <button class="filter-btn" id="select-file-btn">اختر ملف</button>
+            <div class="upload-fields">
+                <select id="catSelect" aria-label="فئة التصميم">
+                    <option value="أنمي">أنمي</option>
+                    <option value="مناظر">مناظر</option>
+                    <option value="شعارات">شعارات</option>
+                </select>
+                <input type="text" id="tagInput" placeholder="الوسوم (مثال: تصميم، شمس)" aria-label="وسوم التصميم" maxlength="200">
+            </div>
+            <div class="spinner" id="uploadSpinner" role="status" aria-label="جاري الرفع"></div>
+            <p id="upload-status"></p>
+        </div>
+
+        <div class="gallery-grid" id="gallery" role="feed" aria-label="معرض الصور"></div>
+
+        <div id="scroll-anchor" aria-hidden="true"></div>
+        <p id="load-more-status" class="loading-state" aria-live="polite"></p>
+    </section>
+
+    <!-- الملف الشخصي -->
+    <section id="profile-view" class="view-section" aria-label="الملف الشخصي">
+        <div class="profile-container">
+            <div class="profile-header-section">
+                <img id="p-avatar" src="https://ui-avatars.com/api/?name=User" class="profile-avatar-large" alt="صورة الملف الشخصي" width="96" height="96">
+                <div style="flex-grow:1;text-align:right;">
+                    <h2 id="p-name">مبدع المنصة</h2>
+                    <p id="p-bio">لا توجد نبذة تعريفية مكتوبة بعد...</p>
+                    <button class="mini-btn" id="edit-profile-trigger">✏️ تعديل بيانات الملف</button>
+                    <button class="mini-btn" id="follow-action-btn" hidden>متابعة</button>
+                </div>
+            </div>
+
+            <div class="profile-stats-grid" aria-label="إحصائيات الملف">
+                <div class="stat-card"><div class="stat-num" id="stat-posts-count">0</div><div class="stat-label">تصميم</div></div>
+                <div class="stat-card"><div class="stat-num" id="stat-followers-count">0</div><div class="stat-label">متابعون</div></div>
+                <div class="stat-card"><div class="stat-num" id="stat-following-count">0</div><div class="stat-label">أتابعهم</div></div>
+                <div class="stat-card"><div class="stat-num" id="stat-likes-count">0</div><div class="stat-label">إعجابات</div></div>
+            </div>
+
+            <form id="profile-edit-form" class="profile-edit-form" hidden>
+                <h3>تعديل الملف الشخصي</h3>
+                <div>
+                    <label for="edit-p-name">الاسم الفني:</label>
+                    <input type="text" id="edit-p-name" maxlength="50" required>
+                </div>
+                <div>
+                    <label for="edit-p-bio">النبذة التعريفية:</label>
+                    <textarea id="edit-p-bio" rows="3" maxlength="300"></textarea>
+                </div>
+                <div>
+                    <label for="edit-p-avatar">رابط الصورة الشخصية (اختياري):</label>
+                    <input type="url" id="edit-p-avatar" placeholder="https://">
+                </div>
+                <div class="profile-edit-actions">
+                    <button type="submit" class="mini-btn" style="background:var(--accent);color:white;">حفظ التغييرات</button>
+                    <button type="button" class="mini-btn" id="cancel-edit-profile" style="background:var(--danger);color:white;">إلغاء</button>
+                </div>
+            </form>
+
+            <div class="profile-tabs" role="tablist" aria-label="تبويبات الملف">
+                <button class="profile-tab active" data-tab="my-designs" role="tab" aria-selected="true">📸 تصاميمي</button>
+                <button class="profile-tab" data-tab="my-favorites" role="tab">⭐ المفضلة</button>
+                <button class="profile-tab" data-tab="followers-list" role="tab">👥 المتابعون</button>
+            </div>
+
+            <div id="profile-tab-content">
+                <div class="gallery-grid" id="profile-gallery-list"></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<footer role="contentinfo">
+    <p>© 2026 Creative Gallery. جميع الحقوق محفوظة.</p>
+    <nav aria-label="روابط قانونية">
+        <a href="#privacy">سياسة الخصوصية</a> |
+        <a href="#terms">شروط الاستخدام</a>
+    </nav>
+</footer>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
