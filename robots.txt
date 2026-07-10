@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://111aez333-creator.github.io/creativ-gallery/sitemap.xml

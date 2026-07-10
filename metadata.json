@@ -1,0 +1,6 @@
+{
+  "name": "Creative Social Gallery",
+  "description": "منصة اجتماعية مبتكرة لعرض ومشاركة أعمال الأنمي، الشعارات، والمناظر الطبيعية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
