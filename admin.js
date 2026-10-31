@@ -6,7 +6,7 @@ import {
   getFirestore, collection, doc, getDoc, setDoc, updateDoc, deleteDoc,
   onSnapshot, serverTimestamp, writeBatch
 } from 'https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js';
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'https://www.gstatic.com/firebasejs/12.17.1/firebase-app-check.js';
+import { initializeAppCheck, ReCaptchaV3Provider } from 'https://www.gstatic.com/firebasejs/12.17.1/firebase-app-check.js';
 import { firebaseConfig, appCheckSiteKey } from './firebase-config.js';
 
 // ⚠️ فقط هذا الإيميل يقدر يدخل للوحة الإدارة. بدّلو من هنا إذا حبيت تبدّل حساب الأدمن،
@@ -20,7 +20,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 try {
   if (['localhost', '127.0.0.1'].includes(location.hostname)) self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
   if (appCheckSiteKey && !String(appCheckSiteKey).startsWith('YOUR_')) {
-    initializeAppCheck(firebaseApp, { provider: new ReCaptchaEnterpriseProvider(appCheckSiteKey), isTokenAutoRefreshEnabled: true });
+    initializeAppCheck(firebaseApp, { provider: new ReCaptchaV3Provider(appCheckSiteKey), isTokenAutoRefreshEnabled: true });
   }
 } catch (e) { console.warn('App Check:', e); }
 const auth = getAuth(firebaseApp);
