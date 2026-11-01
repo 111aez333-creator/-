@@ -14,6 +14,6 @@ export const firebaseConfig = {
   measurementId: "G-22VJPFBSYB"
 };
 
-// App Check (reCAPTCHA v3) — مفتاح الموقع (Site key) من google.com/recaptcha/admin. الـ Secret key يتسجّل فـ Firebase Console → App Check فقط.
+// App Check (Fraud Defense / reCAPTCHA Enterprise) — الـ Site key فقط. نفس القيمة تتحط فـ Firebase Console → App Check → Fraud Defense.
 // مفتاح الموقع (site key) عام وما فيهش سر. تأكد أنو نفس المفتاح المسجّل عندك بالضبط.
 export const appCheckSiteKey = "6Lfl6wkuAAAAAP4wRW1dpFw5yGzTZMy93KmqYmhW";
